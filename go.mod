@@ -53,4 +53,4 @@ replace github.com/softlayer/softlayer-go v0.0.0-20190814165317-b9062a914a22 => 
 
 replace github.ibm.com/ibmcloud/namespace-go-sdk => ./common/github.ibm.com/ibmcloud/namespace-go-sdk
 
-replace github.com/IBM/vpc-go-sdk => ./common/github.com/IBM/vpc-go-sdk
+replace github.com/IBM/vpc-go-sdk => ./common/github.com/ibm/vpc-go-sdk

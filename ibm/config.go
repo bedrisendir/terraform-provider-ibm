@@ -904,10 +904,16 @@ func (c *Config) ClientSession() (interface{}, error) {
 	if sess.BluemixSession.Config.BluemixAPIKey != "" {
 		err = authenticateAPIKey(sess.BluemixSession)
 		if err != nil {
+			log.Printf("Error on authenticateAPIKey: %q\n", err)
 			for count := c.RetryCount; count >= 0; count-- {
+				if bmErr, ok := err.(bmxerror.RequestFailure); ok {
+					log.Printf("Count: %d retrying status code was: %d\n", count, bmErr.StatusCode())
+				}
 				if err == nil || !isRetryable(err) {
+					log.Printf("break retry loop..")
 					break
 				}
+				log.Printf("calling authenticateAPIKey\n")
 				err = authenticateAPIKey(sess.BluemixSession)
 			}
 			if err != nil {
